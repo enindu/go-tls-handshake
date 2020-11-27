@@ -39,17 +39,17 @@ func transport() *http2.Transport {
 }
 
 func tlsConfig() *tls.Config {
-	// Copy server/certificates/certificate.pem file to certificates directory
-	certificate, issue := ioutil.ReadFile("certificates/certificate.pem")
+	// Copy server/keys/certificate.pem file to keys directory
+	certificate, issue := ioutil.ReadFile("keys/certificate.pem")
 	if issue != nil {
 		log.Fatal(issue.Error())
 	}
 
-	rootCertificateAuthority := x509.NewCertPool()
-	rootCertificateAuthority.AppendCertsFromPEM(certificate)
+	rootCertificateAuthorities := x509.NewCertPool()
+	rootCertificateAuthorities.AppendCertsFromPEM(certificate)
 
 	return &tls.Config{
-		RootCAs:            rootCertificateAuthority,
+		RootCAs:            rootCertificateAuthorities,
 		InsecureSkipVerify: false,
 		ServerName:         "localhost",
 	}

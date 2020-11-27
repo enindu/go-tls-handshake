@@ -27,11 +27,11 @@ func main() {
 }
 
 func tlsConfig() *tls.Config {
-	// openssl genrsa -out certificates/private-key.pem 2048
-	// openssl req -nodes -new -x509 -sha256 -days 365 -config certificates/configuration.conf -extensions 'req_ext' -key certificates/private-key.pem -out certificates/certificate.pem
+	// openssl genrsa -out server/keys/key.pem 2048
+	// openssl req -nodes -new -x509 -sha256 -days 365 -config server/keys/config.conf -extensions 'req_ext' -key server/keys/key.pem -out server/keys/certificate.pem
 	// openssl x509 -in certificates/certificate.pem -text
-	key, issue := ioutil.ReadFile("certificates/private-key.pem")
-	certificate, issue := ioutil.ReadFile("certificates/certificate.pem")
+	key, issue := ioutil.ReadFile("keys/key.pem")
+	certificate, issue := ioutil.ReadFile("keys/certificate.pem")
 	if issue != nil {
 		log.Fatal(issue.Error())
 	}
